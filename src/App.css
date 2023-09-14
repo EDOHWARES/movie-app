@@ -1,0 +1,14 @@
+#mobileNav {
+    animation-name: slideIn;
+    animation-duration: 4s;
+}
+
+@keyframes slideIn {
+    from {
+        left: 0;
+        right: 100%;
+    }
+    to {
+        right: 0;
+    }
+}
