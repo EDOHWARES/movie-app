@@ -6,7 +6,8 @@ import Featured from './components/Featured';
 import Footer from './components/Footer';
 import {BiSearchAlt} from "react-icons/bi";
 import {LiaTimesSolid} from "react-icons/lia";
-
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import loading from "./assets/loading.gif";
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
     setShowSearch(true)
   }
 
-  const [movieList, setMovieList] = React.useState([])
+  const [movieList, setMovieList] = React.useState(false)
 
   const getMovies = () => {
     fetch("https://api.themoviedb.org/3/discover/movie?api_key=f4c4f62e78dee0a5dccfd4be11e77ddf")
@@ -28,23 +29,25 @@ function App() {
     getMovies()
   }, [])
 
+  
 
+if(movieList) {
   return (
     <div className='relative'>
       <div className='relative'>
 
-        <div className={`${showSearch ? "flex" : "hidden"} relative w-full md:hidden h-[100vh] bg-black items-center justify-center px-10`}>
-          <div onClick={() => setShowSearch(false)} className='text-white absolute top-4 right-4 bg-rose-700 p-2 rounded-full cursor-pointer hover:bg-rose-400 duration-500'>
-            <LiaTimesSolid />
-          </div>
-          <div className='flex items-center bg-white text-black px-4 py-2 rounded-sm'>
+        <div className={`${showSearch ? "flex" : "hidden" } px-6 relative w-full h-[100vh] md:hidden bg-black items-center justify-center`}>
+          <span onClick={() => setShowSearch(false)} className={`bg-rose-700 absolute top-4 right-4 text-white hover:bg-rose-400 duration-500 rounded-full h-fit p-2 font-bold cursor-pointer`}>
+                <LiaTimesSolid />
+            </span>
+          <form className='flex items-center bg-white text-gray-800 px-4 py-2 rounded-md'>
         <input type="search" placeholder='What do you want to watch ?' 
             className='bg-transparent w-full h-full outline-none border-none'
             />
             <span className='cursor-pointer'>
             <BiSearchAlt className='' />
             </span>
-            </div>
+            </form>
         </div>
 
     <Header handleShowSearch={handleShowSearch} />
@@ -54,6 +57,15 @@ function App() {
       </div>
     </div>
   )
+} else {
+  return (
+    <div className='w-full h-full bg-white flex flex-col items-center justify-center'>
+      <img src={loading} alt="" />
+      <p className='text-gray-500'>Loading..</p>
+      <p className='text-gray-800'>Trying to fetch data, pls wait!</p>
+    </div>
+  )
+}
 }
 
 export default App

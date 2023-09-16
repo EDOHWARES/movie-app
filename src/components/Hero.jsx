@@ -28,7 +28,7 @@ const Hero = () => {
             tag on his head, he is the target of hit men and women everywhere.
         </p>
         <div>
-            <button className='flex items-center space-x-2 bg-rose-700 px-4 py-2 rounded-[0.375rem] font-semibold' >
+            <button className='flex items-center space-x-2 bg-rose-700 hover:bg-rose-800 duration-500 px-4 py-2 rounded-[0.375rem] font-semibold' >
                 <AiFillPlayCircle />
                 <span>WATCH TRAILER</span>
             </button>
